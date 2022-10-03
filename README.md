@@ -1,4 +1,4 @@
-# Universe 2022: What are SBOMs, and how do I make them useful? demo repo
+# Demo for Universe 2022: _What are SBOMs, and how do I make them useful?_ 
 
 This is a simple Maven project that builds a standalone JAR which contains a Jetty webserver and a simple bookstore servlet. The repository hosts a demo and resources to accompany SEC020: _What are SBOMs, and how do I make them useful?_, a talk presented at Universe 2022.
 
