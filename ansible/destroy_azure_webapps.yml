@@ -1,0 +1,62 @@
+---
+
+- hosts: localhost
+  tasks:
+    - name: Parse Azure Credentials
+      set_fact:
+        imported_credentials: "{{ lookup('env', 'AZURE_JSON_CREDENTIALS') | from_json }}"
+      no_log: yes
+
+- hosts: localhost
+  environment:
+    AZURE_CLIENT_ID: '{{ imported_credentials.clientId }}'
+    AZURE_SECRET: '{{ imported_credentials.clientSecret }}'
+    AZURE_SUBSCRIPTION_ID: '{{ imported_credentials.subscriptionId }}'
+    AZURE_TENANT: '{{ imported_credentials.tenantId }}'
+
+  tasks:
+    - name: Parse Context and Register Facts
+      set_fact:
+        azure_resource_group_name: "{{ lookup('env', 'RESOURCE_GROUP') }}"
+        azure_service_plan: "{{ lookup('env', 'SERVICE_PLAN') }}"
+        deployment_ref: "{{ lookup('env', 'DEPLOYMENT_REF') }}"
+        github_repository: "{{ lookup('env', 'GITHUB_REPOSITORY') }}"
+
+    - name: Validate Parameters
+      assert:
+        that:
+          - azure_resource_group_name is defined
+          - (azure_resource_group_name | length) > 0
+
+          - azure_service_plan is defined
+          - (azure_service_plan | length) > 0
+
+          - deployment_ref is defined
+          - github_repository is defined
+
+    - name: Discover Azure Application Service Plans
+      azure_rm_appserviceplan_info:
+        resource_group: '{{ azure_resource_group_name }}'
+        name: '{{ azure_service_plan }}'
+      register: existing_service_plans
+
+    # Remove the matching web apps for the specified tags
+    - block:
+
+      - name: Discover Azure WebApp Instances to Remove
+        azure_rm_webapp_info:
+          resource_group: '{{ azure_resource_group_name }}'
+          tags:
+            - 'ref:{{ deployment_ref }}'
+            - 'repository:{{ github_repository }}'
+        register: existing_webapps
+
+      - name: Destroy metched Web Apps
+        azure_rm_webapp:
+          resource_group: '{{ item.resource_group }}'
+          name: '{{ item.name }}'
+          state: absent
+        loop: '{{ existing_webapps.webapps }}'
+        when: existing_webapps.webapps | length > 0
+
+      when: existing_service_plans.appserviceplans | length > 0
