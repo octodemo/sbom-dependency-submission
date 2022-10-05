@@ -23,7 +23,7 @@ There are various tools that generate SBOMs:
    * [kubernetes-sigs/bom](https://github.com/kubernetes-sigs/bom)
    * [microsoft/sbom-tool](https://github.com/microsoft/sbom-tool)
    * [opensbom-generator/spdx-sbom-generator](https://github.com/opensbom-generator/spdx-sbom-generator)
-   * [anchore/syft](https://github.com/anchore/syft)
+   * [anchore/syft](https://github.com/anchore/syft) and [anchore/sbom-action](https://github.com/marketplace/actions/anchore-sbom-action)
    * [sbs2001/fatbom](https://github.com/sbs2001/fatbom)
 
 There are GitHub Actions that submit SBOMs to the dependency submission API: 
