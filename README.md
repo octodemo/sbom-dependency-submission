@@ -26,7 +26,9 @@ There are various tools that generate SBOMs:
    * [anchore/syft](https://github.com/anchore/syft)
    * [sbs2001/fatbom](https://github.com/sbs2001/fatbom)
 
-There's also a community-owned GitHub Action that [submits CycloneDX SBOMs to the dependency submission API](https://github.com/evryfs/sbom-dependency-submission-action).
+There are GitHub Actions that submit SBOMs to the dependency submission API: 
+   * [Submit a CycloneDX SBOM](https://github.com/evryfs/sbom-dependency-submission-action)
+   * [Submit an SPDX SBOM](https://github.com/jhutchings1/spdx-to-dependency-graph-action)
 
 ## Questions?
 
