@@ -29,6 +29,7 @@ There are various tools that generate SBOMs:
 There are GitHub Actions that submit SBOMs to the dependency submission API: 
    * [Submit a CycloneDX SBOM](https://github.com/evryfs/sbom-dependency-submission-action)
    * [Submit an SPDX SBOM](https://github.com/jhutchings1/spdx-to-dependency-graph-action)
+   * [anchore/sbom-action](https://github.com/marketplace/actions/anchore-sbom-action) can both generate the SBOM and upload it! 
 
 ## Questions?
 
