@@ -2,6 +2,7 @@ name: Syft SBOM Creation
 
 on:
   push:
+  workflow_dipatch:
 
 jobs:
   build_publish:
