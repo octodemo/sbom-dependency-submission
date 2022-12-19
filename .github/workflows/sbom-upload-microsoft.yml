@@ -1,4 +1,4 @@
-name: SBOM upload
+name: MSFT SBOM Creation
 
 on: 
   workflow_dispatch:
