@@ -1,0 +1,11 @@
+{
+    "customizations": {
+      "codespaces": {
+        "repositories": {
+          "octodemo/gartner-sbom": {
+            "permissions": "write-all"
+          }
+        }
+      }
+    }
+  }
