@@ -1,6 +1,6 @@
-name: Dependency crap 
+name: SBOM upload
 
-on: [pull_request, push]
+on: push
 
 jobs:
   build_publish:
@@ -28,6 +28,4 @@ jobs:
         image: target/bookstore-v3-1.0.0-SNAPSHOT.jar
         dependency-snapshot: true
 
-    - name: Dependency review 
-      uses: actions/dependency-review-action@juxtin/snapshot-warnings
-   
+
