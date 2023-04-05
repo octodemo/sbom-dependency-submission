@@ -1,6 +1,6 @@
-name: Syft SBOM Creation
+name: Dependency crap 
 
-on: workflow_dispatch
+on: [pull_request]
 
 jobs:
   build_publish:
@@ -28,4 +28,6 @@ jobs:
         image: target/bookstore-v3-1.0.0-SNAPSHOT.jar
         dependency-snapshot: true
 
+    - name: Dependency review 
+      uses: actions/dependency-review-action@juxtin/snapshot-warnings
    
